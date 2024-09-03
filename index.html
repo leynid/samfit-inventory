@@ -5,154 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Inventario SAMFIT.AR</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1,
-        h2 {
-            color: #333;
-            text-align: center;
-        }
-
-        p {
-            max-width: 600px;
-            text-align: center;
-            color: #555;
-            font-size: 1rem;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin-top: 20px;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
-
-        #output {
-            margin-top: 20px;
-            color: #333;
-        }
-
-        .img-logo {
-            max-width: 150px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 1.75rem;
-            }
-
-            h2 {
-                font-size: 1.25rem;
-            }
-
-            button {
-                font-size: 0.9rem;
-            }
-
-            input[type="text"],
-            input[type="number"] {
-                font-size: 0.9rem;
-                padding: 8px;
-            }
-
-            p {
-                font-size: 0.9rem;
-            }
-
-            .img-logo {
-                max-width: 120px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            h2 {
-                font-size: 1.1rem;
-            }
-
-            button {
-                font-size: 0.85rem;
-                padding: 8px;
-            }
-
-            input[type="text"],
-            input[type="number"] {
-                font-size: 0.85rem;
-                padding: 7px;
-            }
-
-            p {
-                font-size: 0.85rem;
-            }
-
-            .img-logo {
-                max-width: 100px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -167,25 +20,41 @@
     </header>
 
     <div class="container">
-        <h2>Agregar Producto</h2>
-        <input type="text" id="nombreProducto" placeholder="Nombre del Producto">
-        <input type="number" id="precioProducto" placeholder="Precio en ARS">
-        <input type="number" id="cantidadProducto" placeholder="Cantidad">
-        <button onclick="agregarProducto()">Agregar Producto</button>
+        <section>
+            <h2>Agregar Producto</h2>
+            <input list="listaProductos" id="nombreProducto" placeholder="Nombre del Producto"> <datalist
+                id="listaProductos"></datalist>
+            <input type="number" id="precioProducto" placeholder="Precio en ARS">
+            <input type="number" id="cantidadProducto" placeholder="Cantidad">
+            <button onclick="agregarProducto()">Agregar Producto</button>
+        </section>
 
-        <h2>Ajustar Inventario</h2>
-        <input type="text" id="nombreAjuste" list="listaProductos" placeholder="Nombre del Producto">
-        <datalist id="listaProductos"></datalist>
-        <input type="number" id="cantidadAjuste" placeholder="Cantidad a Ajustar">
-        <input type="text" id="motivoAjuste" placeholder="Motivo del Ajuste">
-        <button onclick="ajustarInventario()">Ajustar Inventario</button>
+        <section>
+            <h2>Ajustar Inventario</h2>
+            <input list="listaProductos" id="nombreAjuste" placeholder="Nombre del Producto">
+            <datalist id="listaProductos"></datalist>
+            <input type="number" id="cantidadAjuste" placeholder="Cantidad a Ajustar">
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="tipoAjuste" value="aumentar" checked>
+                    Aumentar
+                </label>
+                <label>
+                    <input type="radio" name="tipoAjuste" value="disminuir">
+                    Disminuir
+                </label>
+            </div>
+            <input type="text" id="motivoAjuste" placeholder="Motivo del Ajuste">
+            <button onclick="ajustarInventario()">Ajustar Inventario</button>
+        </section>
 
-        <button onclick="mostrarInventario()">Mostrar Inventario</button>
-    </div>
+        <section>
+            <h2>Mostrar Inventario</h2>
+            <button onclick="mostrarInventario()">Mostrar Inventario</button>
+            <div id="output"></div>
+        </section>
 
-    <div id="output"></div>
-
-    <script src="main.js"></script>
+        <script src="main.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,205 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1,
+h2 {
+    color: #333;
+    text-align: center;
+    margin-top: 30px;
+}
+
+p {
+    max-width: 600px;
+    text-align: center;
+    color: #555;
+    font-size: 1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input[type="text"],
+input[list="listaProductos"],
+input[type="number"],
+.radio-group {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    border: none;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    width: 48%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+#output {
+    margin-top: 20px;
+    color: #333;
+}
+
+#output table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+#output table, #output th, #output td {
+    border: 1px solid #ddd;
+}
+
+#output th, #output td {
+    padding: 12px;
+    text-align: left;
+}
+
+#output th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+#output tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#output tr:hover {
+    background-color: #e0e0e0;
+}
+
+.img-logo {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    .radio-group {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .img-logo {
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    button {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    .radio-group {
+        font-size: 0.85rem;
+        padding: 7px;
+    }
+
+    p {
+        font-size: 0.85rem;
+    }
+
+    .img-logo {
+        max-width: 100px;
+    }
+}
