@@ -20,41 +20,61 @@
     </header>
 
     <div class="container">
-        <section>
-            <h2>Agregar Producto</h2>
-            <input list="listaProductos" id="nombreProducto" placeholder="Nombre del Producto"> <datalist
-                id="listaProductos"></datalist>
-            <input type="number" id="precioProducto" placeholder="Precio en ARS">
-            <input type="number" id="cantidadProducto" placeholder="Cantidad">
-            <button onclick="agregarProducto()">Agregar Producto</button>
-        </section>
-
-        <section>
-            <h2>Ajustar Inventario</h2>
-            <input list="listaProductos" id="nombreAjuste" placeholder="Nombre del Producto">
-            <datalist id="listaProductos"></datalist>
-            <input type="number" id="cantidadAjuste" placeholder="Cantidad a Ajustar">
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="tipoAjuste" value="aumentar" checked>
-                    Aumentar
-                </label>
-                <label>
-                    <input type="radio" name="tipoAjuste" value="disminuir">
-                    Disminuir
-                </label>
-            </div>
-            <input type="text" id="motivoAjuste" placeholder="Motivo del Ajuste">
-            <button onclick="ajustarInventario()">Ajustar Inventario</button>
-        </section>
-
-        <section>
+        <!-- Sección 1: Tabla con información del archivo products.json -->
+        <section id="section-show-inventory">
             <h2>Mostrar Inventario</h2>
             <button onclick="mostrarInventario()">Mostrar Inventario</button>
-            <div id="output"></div>
+            <div id="output">
+                <table id="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas de la tabla se insertarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <script src="main.js"></script>
-</body>
+        <!-- Sección 2 y 3: Agregar Producto y Ajustar Inventario -->
+        <div class="form-container">
+            <section id="section-add-product">
+                <h2>Agregar Producto</h2>
+                <input list="listaProductos" id="nombreProducto" placeholder="Nombre del Producto">
+                <datalist id="listaProductos"></datalist>
+                <input type="text" id="internalid" placeholder="Internal ID">
+                <input type="number" id="precioProducto" placeholder="Precio en ARS">
+                <input type="number" id="cantidadProducto" placeholder="Cantidad">
+                <button id="botonAgregar">Agregar Producto</button>
+            </section>
 
+            <section id="section-adjust-inventory">
+                <h2>Ajustar Inventario</h2>
+                <input list="listaProductos" id="nombreAjuste" placeholder="Nombre del Producto">
+                <datalist id="listaProductos"></datalist>
+                <input type="number" id="cantidadAjuste" placeholder="Cantidad a Ajustar">
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="tipoAjuste" value="aumentar" checked>
+                        Aumentar
+                    </label>
+                    <label>
+                        <input type="radio" name="tipoAjuste" value="disminuir">
+                        Disminuir
+                    </label>
+                </div>
+                <input type="text" id="motivoAjuste" placeholder="Motivo del Ajuste">
+                <button id="botonAjustar">Ajustar Inventario</button>
+            </section>
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
 </html>
