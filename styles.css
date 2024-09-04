@@ -24,13 +24,23 @@ p {
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     background: white;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin-top: 20px;
     box-sizing: border-box;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas más pequeñas */
+}
+
+#section-add-product, #section-adjust-inventory {
+    width: 48%; /* Ajusta el ancho según sea necesario */
 }
 
 button {
@@ -146,6 +156,11 @@ input[type="number"] {
         padding: 15px;
     }
 
+    #section-add-product, #section-adjust-inventory {
+        width: 100%; /* En pantallas pequeñas, cada sección ocupa el 100% del ancho */
+        margin-bottom: 20px; /* Espacio entre las secciones */
+    }
+
     h1 {
         font-size: 1.75rem;
     }
@@ -175,6 +190,28 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+    .container {
+        display: flex;
+        flex-direction: column; /* Coloca las secciones en una columna */
+    }
+
+    #section-add-product {
+        order: 1; /* Hace que "Agregar Producto" aparezca primero */
+    }
+
+    #section-adjust-inventory {
+        order: 2; /* Hace que "Ajustar Inventario" aparezca segundo */
+    }
+
+    #section-show-inventory {
+        order: 3; /* Hace que "Mostrar Inventario" aparezca último */
+        margin-top: 20px; /* Espacio encima de la sección de "Mostrar Inventario" */
+    }
+
+    body {
+        font-size: 14px; /* Ajusta el tamaño de la fuente para dispositivos móviles */
+    }
+
     h1 {
         font-size: 1.5rem;
     }

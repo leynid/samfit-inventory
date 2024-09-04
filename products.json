@@ -1,0 +1,39 @@
+[
+    {
+        "id": "1",
+        "name": "CALZA LISA",
+        "price": 19300,
+        "quantity": "12"
+    },
+    {
+        "id": "2",
+        "name": "CALZA ESTAMPADA",
+        "price": 26500,
+        "quantity": "12"
+    },
+    {
+        "id": "3",
+        "name": "CAPRI LISO",
+        "price": 12720,
+        "quantity": "12"
+    },
+    {
+        "id": "4",
+        "name": "MUSCULOSA",
+        "price": 15500,
+        "quantity": "12"
+    },
+    {
+        "id": "5",
+        "name": "POLLERA",
+        "price": 19700,
+        "quantity": "12"
+    },
+    {
+        "id": "6",
+        "name": "MEDIAS",
+        "price": 8800,
+        "quantity": "12"
+    }
+]
+
