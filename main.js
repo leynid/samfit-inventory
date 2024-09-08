@@ -1,15 +1,42 @@
-// Declarar variables, constantes y arrays
-let inventario = []; 
+// Clase Producto
+class Producto {
+    constructor(id, nombre, precio, cantidad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+}
 
-// Función para cargar productos desde el archivo JSON
+// Inicialización del inventario
+let inventario = [];
+
+// Función para cargar productos desde localStorage o products.json
 function cargarProductos() {
-    return fetch('products.json')
-        .then(response => response.json())
-        .then(data => {
-            inventario = data; 
-            return data;
-        })
-        .catch(error => console.error('Error al cargar los datos del inventario:', error));
+    const inventarioGuardado = localStorage.getItem('inventario');
+
+    if (inventarioGuardado) {
+        // Si hay datos en localStorage, cargarlos
+        inventario = JSON.parse(inventarioGuardado).map(producto => new Producto(producto.id, producto.nombre, producto.precio, producto.cantidad));
+        mostrarInventario();
+        llenarDatalist();
+    } else {
+        // Si no hay datos en localStorage, cargar desde products.json
+        fetch('products.json')
+            .then(response => response.json())
+            .then(data => {
+                inventario = data.map(producto => new Producto(producto.id, producto.name, producto.price, producto.quantity));
+                guardarInventario(); // Guardar los datos iniciales en localStorage
+                mostrarInventario();
+                llenarDatalist();
+            })
+            .catch(error => console.error('Error al cargar los datos del inventario:', error));
+    }
+}
+
+// Función para guardar el inventario en localStorage
+function guardarInventario() {
+    localStorage.setItem('inventario', JSON.stringify(inventario));
 }
 
 // Función para mostrar el inventario en la tabla
@@ -17,49 +44,46 @@ function mostrarInventario() {
     const tableBody = document.querySelector('#inventory-table tbody');
     tableBody.innerHTML = ''; // Limpiar la tabla 
 
-    inventario.forEach(product => {
+    inventario.forEach(producto => {
         const row = document.createElement('tr');
 
-        // Crear y agregar celdas a la fila
         const idCell = document.createElement('td');
-        idCell.textContent = product.id;
+        idCell.textContent = producto.id;
         row.appendChild(idCell);
 
         const nameCell = document.createElement('td');
-        nameCell.textContent = product.name;
+        nameCell.textContent = producto.nombre;
         row.appendChild(nameCell);
 
         const priceCell = document.createElement('td');
-        priceCell.textContent = product.price;
+        priceCell.textContent = producto.precio;
         row.appendChild(priceCell);
 
         const quantityCell = document.createElement('td');
-        quantityCell.textContent = product.quantity;
+        quantityCell.textContent = producto.cantidad;
         row.appendChild(quantityCell);
 
-        // Agregar la fila a la tabla
         tableBody.appendChild(row);
     });
 }
 
-// Función para llenar la lista de productos en el input datalist
+// Función para llenar el datalist
 function llenarDatalist() {
     const listaProductos = document.getElementById('listaProductos');
-    listaProductos.innerHTML = ''; // Limpiar la lista 
+    listaProductos.innerHTML = ''; // Limpiar el datalist 
 
-    inventario.forEach(product => {
+    inventario.forEach(producto => {
         const option = document.createElement('option');
-        option.value = product.name;
+        option.value = producto.nombre;
         listaProductos.appendChild(option);
     });
 
-    // Agregar la opción de crear un nuevo producto
     const optionNuevo = document.createElement('option');
     optionNuevo.value = 'Crear nuevo';
     listaProductos.appendChild(optionNuevo);
 }
 
-// Función para agregar un nuevo producto al inventario
+// Función para agregar un nuevo producto
 function agregarProducto() {
     const nombreProducto = document.getElementById('nombreProducto').value;
     const precioProducto = parseFloat(document.getElementById('precioProducto').value);
@@ -70,19 +94,25 @@ function agregarProducto() {
         return;
     }
 
-    const nuevoProducto = {
-        id: inventario.length + 1,
-        name: nombreProducto,
-        price: precioProducto,
-        quantity: cantidadProducto
-    };
+    // Determinar el siguiente ID disponible
+    const siguienteId = inventario.length > 0 ? Math.max(...inventario.map(p => p.id)) + 1 : 1;
 
+    // Crear un nuevo producto
+    const nuevoProducto = new Producto(siguienteId, nombreProducto, precioProducto, cantidadProducto);
+
+    // Agregar el nuevo producto al inventario
     inventario.push(nuevoProducto);
-    mostrarInventario();
-    llenarDatalist(); // Actualizar la lista 
 
-    // Mostrar alerta
-    alert(`Nuevo producto creado ${nombreProducto} en ${cantidadProducto} unidades.`);
+    // Guardar el inventario actualizado
+    guardarInventario();
+
+    // Mostrar el inventario actualizado
+    mostrarInventario();
+
+    // Actualizar el datalist
+    llenarDatalist();
+
+    alert(`Producto creado: ${nombreProducto}, cantidad: ${cantidadProducto}`);
 
     // Limpiar los campos del formulario
     document.getElementById('nombreProducto').value = '';
@@ -92,87 +122,63 @@ function agregarProducto() {
 
 // Función para ajustar el inventario
 function ajustarInventario() {
-    const nombreAjuste = document.getElementById('nombreAjuste').value.trim().toUpperCase();
-    const cantidadAjuste = document.getElementById('cantidadAjuste').value.trim();
+    const nombreAjuste = document.getElementById('nombreAjuste').value.trim();
+    const cantidadAjuste = parseInt(document.getElementById('cantidadAjuste').value, 10);
     const tipoAjuste = document.querySelector('input[name="tipoAjuste"]:checked').value;
     const motivoAjuste = document.getElementById('motivoAjuste').value.trim();
 
-    if (!nombreAjuste || !cantidadAjuste || !tipoAjuste || !motivoAjuste) {
-        console.error('Faltan datos en el formulario de ajuste de inventario.');
+    // Validar campos
+    if (!nombreAjuste || isNaN(cantidadAjuste) || !motivoAjuste) {
+        alert('Por favor, completa todos los campos para ajustar el inventario.');
         return;
     }
 
-    const productoExistente = inventario.find(producto => producto.name.trim().toUpperCase() === nombreAjuste);
+    // Buscar el producto en el inventario
+    const productoExistente = inventario.find(producto => producto.nombre === nombreAjuste);
 
     if (productoExistente) {
+        console.log('Producto antes del ajuste:', productoExistente);
+
+        // Asegúrate de que la cantidad es un número
+        const cantidadActual = Number(productoExistente.cantidad); // Convertir a número
+        const ajuste = Number(cantidadAjuste); // Convertir a número
+
+        console.log(`Tipo de ajuste: ${tipoAjuste}`);
+        console.log(`Cantidad actual: ${cantidadActual}`);
+        console.log(`Cantidad a ajustar: ${ajuste}`);
+
+        // Ajustar la cantidad
         if (tipoAjuste === 'aumentar') {
-            productoExistente.quantity = parseInt(productoExistente.quantity) + parseInt(cantidadAjuste);
+            productoExistente.cantidad = cantidadActual + ajuste;
+            console.log(`Cantidad después de aumentar: ${productoExistente.cantidad}`);
         } else if (tipoAjuste === 'disminuir') {
-            productoExistente.quantity = parseInt(productoExistente.quantity) - parseInt(cantidadAjuste);
-            if (productoExistente.quantity < 0) {
-                productoExistente.quantity = 0;
-            }
+            productoExistente.cantidad = Math.max(0, cantidadActual - ajuste);
+            console.log(`Cantidad después de disminuir: ${productoExistente.cantidad}`);
         }
 
+        // Guardar y mostrar el inventario actualizado
         guardarInventario();
         mostrarInventario();
 
-        // Mostrar alerta
-        alert(`Inventario ajustado: ${nombreAjuste} ${tipoAjuste} en ${cantidadAjuste} unidades. Motivo: ${motivoAjuste}`);
+        alert(`Inventario ajustado: ${nombreAjuste} ${tipoAjuste} en ${ajuste} unidades. Motivo: ${motivoAjuste}`);
 
-        // Reiniciar el formulario
+        // Limpiar formulario
         document.getElementById('nombreAjuste').value = '';
         document.getElementById('cantidadAjuste').value = '';
-        document.querySelector('input[name="tipoAjuste"][value="aumentar"]').checked = true; // Restablecer el valor predeterminado
+        document.querySelector('input[name="tipoAjuste"][value="aumentar"]').checked = true;
         document.getElementById('motivoAjuste').value = '';
     } else {
-        console.error('El producto no existe en el inventario.');
+        alert('El producto no existe en el inventario.');
     }
-}
-
-// Llamar a mostrarInventario() al cargar la página para mostrar la tabla inicial
-document.addEventListener('DOMContentLoaded', () => {
-    cargarProductos().then(() => {
-        mostrarInventario();
-        llenarDatalist();
-    });
-});
-
-// Función para guardar el inventario
-function guardarInventario() {
-    fetch('save-products.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(inventario)
-    })
-    .then(response => response.json())
-    .then(data => console.log('Inventario guardado:', data))
-    .catch(error => console.error('Error al guardar el inventario:', error));
 }
 
 // Asignar eventos a los botones
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar los productos y mostrar el inventario
-    cargarProductos().then(() => {
-        mostrarInventario();
-        llenarDatalist();
-    });
+    cargarProductos();
 
-    // Referencia a los botones y asignar eventos
     const botonAgregar = document.getElementById('botonAgregar');
     const botonAjustar = document.getElementById('botonAjustar');
 
-    if (botonAgregar) {
-        botonAgregar.addEventListener('click', agregarProducto);
-    } else {
-        console.error('No se encontró el botón con el id "botonAgregar".');
-    }
-
-    if (botonAjustar) {
-        botonAjustar.addEventListener('click', ajustarInventario);
-    } else {
-        console.error('No se encontró el botón con el id "botonAjustar".');
-    }
+    botonAgregar.addEventListener('click', agregarProducto);
+    botonAjustar.addEventListener('click', ajustarInventario);
 });

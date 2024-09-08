@@ -18,30 +18,10 @@
         <p>Gestiona el inventario de la tienda. Agrega productos, ajusta el inventario, y visualiza el inventario en
             forma de lista.</p>
     </header>
-
+    
     <div class="container">
-        <!-- Sección 1: Tabla con información del archivo products.json -->
-        <section id="section-show-inventory">
-            <h2>Mostrar Inventario</h2>
-            <button onclick="mostrarInventario()">Mostrar Inventario</button>
-            <div id="output">
-                <table id="inventory-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Las filas de la tabla se insertarán aquí dinámicamente -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Sección 2 y 3: Agregar Producto y Ajustar Inventario -->
+    
+        <!-- Sección 1 y 2: Agregar Producto y Ajustar Inventario -->
         <div class="form-container">
             <section id="section-add-product">
                 <h2>Agregar Producto</h2>
@@ -72,6 +52,26 @@
                 <button id="botonAjustar">Ajustar Inventario</button>
             </section>
         </div>
+
+            <!-- Sección 2: Tabla con información del archivo products.json -->
+            <section id="section-show-inventory">
+                <h2>Mostrar Inventario</h2>
+                        <div id="output">
+                    <table id="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Las filas de la tabla se insertarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
     </div>
 
