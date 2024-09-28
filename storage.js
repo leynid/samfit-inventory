@@ -18,17 +18,17 @@ function cargarProductos() {
     if (inventarioGuardado) {
         // Si hay datos en localStorage, cargarlos
         inventario = JSON.parse(inventarioGuardado).map(producto => new Producto(producto.id, producto.nombre, producto.precio, producto.cantidad));
-        mostrarInventario(); // Esta función debe estar en main.js
-        llenarDatalist(); // Esta función también debe estar en main.js
+        mostrarInventario(); 
+        llenarDatalist(); 
     } else {
         // Si no hay datos en localStorage, cargar desde products.json
-        fetch('js/products.json')
+        fetch('products.json')
             .then(response => response.json())
             .then(data => {
                 inventario = data.map(producto => new Producto(producto.id, producto.name, producto.price, producto.quantity));
                 guardarInventario(); // Guardar los datos iniciales en localStorage
-                mostrarInventario(); // Invocar la función de main.js
-                llenarDatalist(); // Invocar la función de main.js
+                mostrarInventario(); 
+                llenarDatalist(); 
             })
             .catch(error => console.error('Error al cargar los datos del inventario:', error));
     }
