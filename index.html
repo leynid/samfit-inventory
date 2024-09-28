@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Inventario SAMFIT.AR</title>
     <link rel="stylesheet" href="styles.css">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"></head>
 
 <body>
     <header>
@@ -18,9 +18,11 @@
         <p>Gestiona el inventario de la tienda. Agrega productos, ajusta el inventario, y visualiza el inventario en
             forma de lista.</p>
     </header>
-    
+
+    <div id="mensaje" style="display:none; color: #e8630a;"></div>
+
     <div class="container">
-    
+
         <!-- Sección 1 y 2: Agregar Producto y Ajustar Inventario -->
         <div class="form-container">
             <section id="section-add-product">
@@ -53,28 +55,33 @@
             </section>
         </div>
 
-            <!-- Sección 2: Tabla con información del archivo products.json -->
-            <section id="section-show-inventory">
-                <h2>Mostrar Inventario</h2>
-                        <div id="output">
-                    <table id="inventory-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Las filas de la tabla se insertarán aquí dinámicamente -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+        <!-- Sección 2: Tabla con información del archivo products.json -->
+        <section id="section-show-inventory">
+            <h2>Mostrar Inventario</h2>
+            <div id="output">
+                <table id="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas de la tabla se insertarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
     </div>
 
+    <script src="storage.js"></script>
     <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
+
 </html>
