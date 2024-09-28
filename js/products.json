@@ -1,45 +1,45 @@
 [
     {
         "id": "1",
-        "image": "img/products/1-calzalisa.png",
+        "image": "img/1-calzalisa.png",
         "name": "CALZA LISA",
         "price": 19300,
-        "quantity": "12",
+        "quantity": "12"
     },
     {
         "id": "2",
-        "image": "img/products/2-calzaestampada.png",
+        "image": "img/2-calzaestampada.png",
         "name": "CALZA ESTAMPADA",
         "price": 26500,
-        "quantity": "12",
+        "quantity": "12"
     },
     {
         "id": "3",
-        "image": "img/products/3-capriliso.png",
+        "image": "img/3-capriliso.png",
         "name": "CAPRI LISO",
         "price": 12720,
-        "quantity": "12",
+        "quantity": "12"
     },
     {
         "id": "4",
-        "image": "img/products/4-musculosa.png",
+        "image": "img/4-musculosa.png",
         "name": "MUSCULOSA",
         "price": 15500,
-        "quantity": "12",
+        "quantity": "12"
     },
     {
         "id": "5",
-        "image": "img/products/5-pollera.png",
+        "image": "img/5-pollera.png",
         "name": "POLLERA",
         "price": 19700,
-        "quantity": "12",
+        "quantity": "12"
     },
     {
         "id": "6",
-        "image": "img/products/6-medias.png",
+        "image": "img/6-medias.png",
         "name": "MEDIAS",
         "price": 8800,
-        "quantity": "12",
+        "quantity": "12"
     }
 ]
 
