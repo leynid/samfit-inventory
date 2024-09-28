@@ -38,7 +38,7 @@ function mostrarInventario() {
 
         const imageCell = document.createElement('td');
         const imgElement = document.createElement('img');
-        imgElement.src = `./img/products/${producto.image}`;
+        imgElement.src = producto.image;
         imgElement.style.width = '50px'; 
         imgElement.style.height = 'auto'; 
         imageCell.appendChild(imgElement);
