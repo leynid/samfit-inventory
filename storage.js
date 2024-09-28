@@ -22,7 +22,7 @@ function cargarProductos() {
         llenarDatalist(); // Esta función también debe estar en main.js
     } else {
         // Si no hay datos en localStorage, cargar desde products.json
-        fetch('js/products.json')
+        fetch('products.json')
             .then(response => response.json())
             .then(data => {
                 inventario = data.map(producto => new Producto(producto.id, producto.name, producto.price, producto.quantity));
